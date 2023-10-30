@@ -1,0 +1,21 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: POSTGRES_USER
+      POSTGRES_PASSWORD: 123456
+
+  web:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - ./saleCar:/app/saleCar
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
